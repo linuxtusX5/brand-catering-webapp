@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+:root {
+  --color-primary: #f4efe3;
+  --color-secondary: #4b3a28;
+
+  --font-display: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+}

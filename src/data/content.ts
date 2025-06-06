@@ -115,3 +115,35 @@ export const teamRoles = [
   "Pastry Chef",
   "Operations Manager",
 ];
+export const blogPosts = [
+  {
+    title: "Corporate Event Catering: Beyond the Basics",
+    date: "May 22, 2023",
+    image:
+      "https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+    summary:
+      "Elevate your next corporate event with our premium catering services.",
+    content:
+      "From breakfast meetings to gala dinners, we provide tailored catering solutions that impress clients and motivate employees. Our corporate packages include customizable menus, professional service staff, and seamless logistics management.",
+  },
+  {
+    title: "Farm-to-Table: Our Commitment to Sustainability",
+    date: "April 10, 2023",
+    image:
+      "https://images.unsplash.com/photo-1470549638415-0a0755be0619?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+    summary:
+      "Learn about our partnerships with local farmers and our sustainable practices.",
+    content:
+      "We believe in responsible sourcing and minimal waste. Our relationships with local producers ensure the freshest ingredients while supporting the community. We've implemented eco-friendly practices throughout our operations, from composting to using biodegradable packaging.",
+  },
+  {
+    title: "The Art of Food Presentation",
+    date: "March 5, 2023",
+    image:
+      "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+    summary:
+      "How we create visually stunning dishes that taste as good as they look.",
+    content:
+      "Our culinary team approaches each plate as a canvas. Using techniques from molecular gastronomy to traditional garnishing, we ensure that every dish is Instagram-worthy without sacrificing flavor or quality. The first taste is with the eyes, and we take that seriously.",
+  },
+];

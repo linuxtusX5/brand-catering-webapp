@@ -13,16 +13,21 @@ export default function Header() {
     { label: "Contact", path: "/contact" },
   ];
   return (
-    <header className="bg-white shadow-md">
+    <header className="shadow-md" style={{ backgroundColor: "#F4EFE3" }}>
       <div className="max-w-6xl mx-auto px-4">
-        <div className="flex justify-between items-center py-4">
+        <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <span className="text-2xl font-bold text-yellow-600">
-              Whisked Roots
+            <img
+              src="/src/assets/logo.png"
+              alt="Gourmet Catering Co. Logo"
+              className="h-20 w-auto mb-2 text-center"
+            />
+            <span className="text-2xl font-bold text-[var(--color-secondary)]">
+              Whisked
             </span>
           </div>
 
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-8 font-bold">
             {tabs.map((tab) => (
               <NavLink
                 key={tab.path}
@@ -62,7 +67,7 @@ export default function Header() {
                 className={`${
                   activeTab === tab.label
                     ? "text-yellow-600 font-medium"
-                    : "text-gray-600"
+                    : "text-gray-600 "
                 } capitalize text-left py-2 transition duration-300`}
               >
                 {tab.label}
