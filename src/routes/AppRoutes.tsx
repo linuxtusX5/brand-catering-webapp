@@ -1,10 +1,17 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "../pages/Home";
-import Menu from "../pages/Menu";
-import About from "../pages/About";
-import Contact from "../pages/Contact";
-import Blog from "../pages/Blog";
-import Catering from "../pages/Catering";
+import Home from "../pages/client/Home";
+import Menu from "../pages/client/Menu";
+import About from "../pages/client/About";
+import Contact from "../pages/client/Contact";
+import Blog from "../pages/client/Blog";
+import Catering from "../pages/client/Catering";
+
+import ClientLayout from "../components/layout/ClientLayout";
+import AdminLayout from "../components/layout/AdminLayout";
+
+import Dashboard from "../pages/admin/Dashboard";
+import AdminMenu from "../pages/admin/AdminMenu";
+import Customers from "../pages/admin/Customers";
 
 function AppRoutes() {
   const handleContactClick = () => {
@@ -14,12 +21,24 @@ function AppRoutes() {
 
   return (
     <Routes>
-      <Route path="/" element={<Home onContactClick={handleContactClick} />} />
-      <Route path="/menu" element={<Menu />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/blog" element={<Blog />} />
-      <Route path="/catering" element={<Catering />} />
-      <Route path="/contact" element={<Contact />} />
+      {/* Client Routes */}
+      <Route element={<ClientLayout />}>
+        <Route
+          path="/"
+          element={<Home onContactClick={handleContactClick} />}
+        />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/catering" element={<Catering />} />
+        <Route path="/contact" element={<Contact />} />
+      </Route>
+      {/* Admin Routes */}
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<Dashboard />} />
+        <Route path="admin-menu" element={<AdminMenu />} />
+        <Route path="customers" element={<Customers />} />
+      </Route>
     </Routes>
   );
 }

@@ -147,3 +147,51 @@ export const blogPosts = [
       "Our culinary team approaches each plate as a canvas. Using techniques from molecular gastronomy to traditional garnishing, we ensure that every dish is Instagram-worthy without sacrificing flavor or quality. The first taste is with the eyes, and we take that seriously.",
   },
 ];
+export const stats = [
+  { title: "Total Orders", value: "254", icon: "📊", color: "bg-blue-500" },
+  { title: "Revenue", value: "$12,543", icon: "💰", color: "bg-green-500" },
+  {
+    title: "Pending Orders",
+    value: "13",
+    icon: "⏳",
+    color: "bg-yellow-500",
+  },
+  { title: "Customers", value: "89", icon: "👥", color: "bg-purple-500" },
+];
+export const recentOrders = [
+  {
+    id: 1,
+    customer: "John Doe",
+    date: "2023-05-15",
+    amount: "$245",
+    status: "Completed",
+  },
+  {
+    id: 2,
+    customer: "Jane Smith",
+    date: "2023-05-14",
+    amount: "$125",
+    status: "Pending",
+  },
+  {
+    id: 3,
+    customer: "Bob Johnson",
+    date: "2023-05-13",
+    amount: "$350",
+    status: "Completed",
+  },
+  {
+    id: 4,
+    customer: "Alice Brown",
+    date: "2023-05-12",
+    amount: "$180",
+    status: "Cancelled",
+  },
+  {
+    id: 5,
+    customer: "Charlie Wilson",
+    date: "2023-05-11",
+    amount: "$420",
+    status: "Completed",
+  },
+];

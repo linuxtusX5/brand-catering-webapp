@@ -1,6 +1,6 @@
 import React from "react";
-import { blogPosts } from "../data/content";
-import BlogPost from "../components/BlogPost";
+import { blogPosts } from "../../data/content";
+import BlogPost from "../../components/BlogPost";
 
 export default function Blog() {
   const [featuredPost] = React.useState({

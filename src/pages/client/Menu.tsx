@@ -1,4 +1,4 @@
-import { menuItems } from "../data/content";
+import { menuItems } from "../../data/content"; // Adjust the import path as necessary
 import { Link } from "react-router-dom";
 
 export default function Menu() {

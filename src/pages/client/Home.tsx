@@ -1,5 +1,5 @@
-import Services from "../components/Services";
-import Testimonials from "../components/Testimonials";
+import Services from "../../components/Services";
+import Testimonials from "../../components/Testimonials";
 
 const Home = ({ onContactClick }: { onContactClick: () => void }) => (
   <div className="space-y-12">
