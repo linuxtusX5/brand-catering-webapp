@@ -1,4 +1,20 @@
-import { DollarSign, ShoppingCart, Users, TrendingUp } from "lucide-react";
+import {
+  Award,
+  Heart,
+  Clock,
+  DollarSign,
+  ShoppingCart,
+  Users,
+  TrendingUp,
+  Cake,
+  Building,
+  Utensils,
+  Wine,
+  Coffee,
+  Facebook,
+  Instagram,
+  Twitter,
+} from "lucide-react";
 
 export const services = [
   {
@@ -569,5 +585,176 @@ export const inventory = [
     supplier: "Spice Masters",
     lastRestocked: "2025-01-01",
     status: "good",
+  },
+];
+export const features = [
+  {
+    icon: Award,
+    iconProps: { className: "w-8 h-8" },
+    title: "Award-Winning Quality",
+    description:
+      "Recognized for excellence in culinary arts and service delivery across the region.",
+  },
+  {
+    icon: Heart,
+    iconProps: { className: "w-8 h-8" },
+    title: "Passion for Perfection",
+    description:
+      "Every dish is crafted with love, attention to detail, and the finest ingredients.",
+  },
+  {
+    icon: Clock,
+    iconProps: { className: "w-8 h-8" },
+    title: "Timely Service",
+    description:
+      "Punctual, professional service that ensures your event runs seamlessly.",
+  },
+  {
+    icon: Users,
+    iconProps: { className: "w-8 h-8" },
+    title: "Expert Team",
+    description:
+      "Our skilled chefs and service staff bring decades of combined experience.",
+  },
+];
+export const serviceCategories = [
+  {
+    id: 0,
+    title: "Wedding Catering",
+    iconProps: { className: "w-8 h-8" },
+    icon: Cake,
+    description:
+      "Make your special day unforgettable with our exquisite wedding menus.",
+    image:
+      "https://images.pexels.com/photos/1702373/pexels-photo-1702373.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    features: [
+      "Custom menu design and tasting sessions",
+      "Professional service staff and coordination",
+      "Elegant presentation and setup",
+      "Dietary restrictions accommodated",
+      "Full bar service available",
+    ],
+  },
+  {
+    id: 1,
+    title: "Corporate Events",
+    icon: Building,
+    iconProps: { className: "w-8 h-8" },
+    description:
+      "Professional catering solutions for business meetings and corporate functions.",
+    image:
+      "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    features: [
+      "Breakfast, lunch, and dinner options",
+      "Coffee breaks and refreshment service",
+      "Formal plated dinners or casual buffets",
+      "On-time delivery and setup",
+      "Professional presentation",
+    ],
+  },
+  {
+    id: 2,
+    title: "Private Parties",
+    icon: Users,
+    iconProps: { className: "w-8 h-8" },
+    description:
+      "Celebrate life's special moments with our personalized catering services.",
+    image:
+      "https://images.pexels.com/photos/2747449/pexels-photo-2747449.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    features: [
+      "Birthday parties and anniversaries",
+      "Holiday celebrations and family gatherings",
+      "Graduation parties and reunions",
+      "Cocktail parties and social events",
+      "Customizable menu options",
+    ],
+  },
+];
+
+export const menuHighlights = [
+  {
+    category: "Appetizers",
+    icon: Utensils,
+    iconProps: { className: "w-8 h-8" },
+    items: [
+      "Truffle Arancini",
+      "Smoked Salmon Canapés",
+      "Beef Tenderloin Crostini",
+      "Seasonal Bruschetta",
+    ],
+  },
+  {
+    category: "Main Courses",
+    icon: Wine,
+    iconProps: { className: "w-8 h-8" },
+    items: [
+      "Herb-Crusted Rack of Lamb",
+      "Pan-Seared Halibut",
+      "Braised Short Ribs",
+      "Vegetarian Wellington",
+    ],
+  },
+  {
+    category: "Desserts",
+    icon: Cake,
+    iconProps: { className: "w-8 h-8" },
+    items: [
+      "Chocolate Lava Cake",
+      "Crème Brûlée",
+      "Seasonal Fruit Tarts",
+      "Artisan Cheese Selection",
+    ],
+  },
+  {
+    category: "Beverages",
+    icon: Coffee,
+    iconProps: { className: "w-8 h-8" },
+    items: [
+      "Craft Cocktails",
+      "Premium Wine Selection",
+      "Specialty Coffee Bar",
+      "Fresh Juice Blends",
+    ],
+  },
+];
+export const footerLinks = {
+  services: [
+    { name: "Wedding Catering", href: "#services" },
+    { name: "Corporate Events", href: "#services" },
+    { name: "Private Parties", href: "#services" },
+    { name: "Menu Planning", href: "#services" },
+  ],
+  company: [
+    { name: "About Us", href: "#about" },
+    { name: "Our Team", href: "#about" },
+    { name: "Gallery", href: "#gallery" },
+    { name: "Testimonials", href: "#testimonials" },
+  ],
+  resources: [
+    { name: "Menu Samples", href: "#" },
+    { name: "Planning Guide", href: "#" },
+    { name: "FAQ", href: "#" },
+    { name: "Blog", href: "#" },
+  ],
+};
+
+export const socialLinks = [
+  {
+    name: "Facebook",
+    icon: Facebook,
+    iconProps: { className: "w-8 h-8" },
+    href: "#",
+  },
+  {
+    name: "Instagram",
+    icon: Instagram,
+    iconProps: { className: "w-8 h-8" },
+    href: "#",
+  },
+  {
+    name: "Twitter",
+    icon: Twitter,
+    iconProps: { className: "w-8 h-8" },
+    href: "#",
   },
 ];
