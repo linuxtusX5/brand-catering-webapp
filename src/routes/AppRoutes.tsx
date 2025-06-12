@@ -17,26 +17,25 @@ import Analytics from "../pages/admin/Analytics";
 import Staff from "../pages/admin/Staff";
 import Inventory from "../pages/admin/Inventory";
 import Settings from "../pages/admin/Settings";
+import Gallery from "../pages/client/Gallery";
 
 function AppRoutes() {
-  const handleContactClick = () => {
-    // Example: navigate to contact page
-    window.location.href = "/";
-  };
+  // const handleContactClick = () => {
+  //   // Example: navigate to contact page
+  //   window.location.href = "/";
+  // };
 
   return (
     <Routes>
       {/* Client Routes */}
       <Route element={<ClientLayout />}>
-        <Route
-          path="/"
-          element={<Home onContactClick={handleContactClick} />}
-        />
+        <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/catering" element={<Catering />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/gallery" element={<Gallery />} />
       </Route>
       {/* Admin Routes */}
       <Route path="/admin" element={<AdminLayout />}>

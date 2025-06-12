@@ -14,6 +14,9 @@ import {
   Facebook,
   Instagram,
   Twitter,
+  Phone,
+  Mail,
+  MapPin,
 } from "lucide-react";
 
 export const services = [
@@ -44,27 +47,39 @@ export const services = [
 ];
 export const testimonials = [
   {
-    name: "Sarah Johnson",
+    name: "Sarah & Michael Johnson",
     event: "Wedding Reception",
-    quote:
-      "The food was absolutely amazing! Our guests are still talking about it months later.",
     rating: 5,
+    text: "Elegant Catering made our wedding day absolutely perfect! The food was exceptional, the presentation was stunning, and the service was flawless. Our guests are still talking about how amazing everything was. We couldn't have asked for a better catering experience.",
+    image:
+      "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop",
   },
   {
-    name: "Michael Chen",
-    event: "Corporate Luncheon",
-    quote:
-      "Professional service and delicious food. Will definitely use again for our company events.",
+    name: "David Chen",
+    event: "Corporate Annual Dinner",
     rating: 5,
+    text: "We've worked with Whisked Root for three consecutive years for our company events. Their professionalism, attention to detail, and consistently outstanding food quality make them our go-to choice. They understand our needs and always exceed expectations.",
+    image:
+      "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop",
   },
   {
-    name: "Emily Rodriguez",
-    event: "Birthday Party",
-    quote:
-      "They made my 40th birthday special with their attention to detail and fantastic menu.",
-    rating: 4,
+    name: "Maria Rodriguez",
+    event: "50th Anniversary Celebration",
+    rating: 5,
+    text: "The team at Whisked Root helped us create the perfect celebration for my parents' golden anniversary. From the menu planning to the final cleanup, everything was handled with such care and expertise. The food was restaurant-quality, and the service was impeccable.",
+    image:
+      "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop",
+  },
+  {
+    name: "Robert Thompson",
+    event: "Charity Gala",
+    rating: 5,
+    text: "Whisked Root catered our annual charity gala for 200 guests, and they absolutely nailed it. The variety of dietary options, the beautiful presentation, and the seamless service allowed us to focus on our cause while knowing our guests were being taken care of perfectly.",
+    image:
+      "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop",
   },
 ];
+
 export const teamRoles = [
   "Executive Chef",
   "Event Director",
@@ -756,5 +771,82 @@ export const socialLinks = [
     icon: Twitter,
     iconProps: { className: "w-8 h-8" },
     href: "#",
+  },
+];
+export const galleryImages = [
+  {
+    src: "https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    alt: "Elegant appetizer plating",
+    category: "Appetizers",
+  },
+  {
+    src: "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    alt: "Gourmet main course",
+    category: "Main Courses",
+  },
+  {
+    src: "https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    alt: "Wedding cake and desserts",
+    category: "Desserts",
+  },
+  {
+    src: "https://images.pexels.com/photos/1581384/pexels-photo-1581384.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    alt: "Buffet setup",
+    category: "Setup",
+  },
+  {
+    src: "https://images.pexels.com/photos/2788792/pexels-photo-2788792.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    alt: "Fine dining presentation",
+    category: "Plating",
+  },
+  {
+    src: "https://images.pexels.com/photos/1395967/pexels-photo-1395967.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    alt: "Corporate event setup",
+    category: "Events",
+  },
+  {
+    src: "https://images.pexels.com/photos/1229040/pexels-photo-1229040.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    alt: "Cocktail service",
+    category: "Beverages",
+  },
+  {
+    src: "https://images.pexels.com/photos/1702373/pexels-photo-1702373.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    alt: "Wedding reception",
+    category: "Weddings",
+  },
+  {
+    src: "https://images.pexels.com/photos/2747449/pexels-photo-2747449.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    alt: "Party catering",
+    category: "Parties",
+  },
+];
+export const contactInfo = [
+  {
+    icon: Phone,
+    title: "Phone",
+    iconProps: { className: "w-8 h-8" },
+    details: "(555) 123-4567",
+    description: "Call us for immediate assistance",
+  },
+  {
+    icon: Mail,
+    title: "Email",
+    iconProps: { className: "w-8 h-8" },
+    details: "info@whiskedroot.com",
+    description: "Send us your questions anytime",
+  },
+  {
+    icon: MapPin,
+    title: "Location",
+    iconProps: { className: "w-8 h-8" },
+    details: "123 Culinary Avenue, Food City, FC 12345",
+    description: "Visit our kitchen and tasting room",
+  },
+  {
+    icon: Clock,
+    title: "Hours",
+    iconProps: { className: "w-8 h-8" },
+    details: "Mon-Fri: 9AM-7PM, Sat: 10AM-5PM",
+    description: "We're here when you need us",
   },
 ];

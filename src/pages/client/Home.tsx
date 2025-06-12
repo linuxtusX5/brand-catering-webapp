@@ -1,15 +1,41 @@
 // import Services from "../../components/Services";
 // import Testimonials from "../../components/Testimonials";
-import { useState } from "react";
-import { ChefHat, Star, Users } from "lucide-react";
+import { useState, useEffect } from "react";
+import {
+  ChefHat,
+  Star,
+  Users,
+  ChevronLeft,
+  ChevronRight,
+  Quote,
+} from "lucide-react";
 import {
   features,
   serviceCategories,
   menuHighlights,
+  testimonials,
 } from "../../data/content";
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const nextTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentTestimonial(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
+  };
   return (
     <>
       <section
@@ -270,6 +296,124 @@ const Home = () => {
                   </ul>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-sm font-semibold text-amber-600 tracking-wide uppercase mb-4">
+              Client Testimonials
+            </h2>
+            <h3 className="text-4xl font-bold text-gray-900 mb-6">
+              What Our Clients Say About
+              <span className="text-[var(--color-primary)]"> Our Service</span>
+            </h3>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Don't just take our word for it. Here's what our satisfied clients
+              have to say about their experience with Whisked Root.
+            </p>
+          </div>
+
+          {/* Testimonial Carousel */}
+          <div className="relative max-w-4xl mx-auto">
+            <div className="bg-gray-50 rounded-3xl p-8 lg:p-12 relative overflow-hidden">
+              {/* Quote Icon */}
+              <div className="absolute top-8 left-8 text-amber-200">
+                <Quote className="w-16 h-16" />
+              </div>
+
+              {/* Testimonial Content */}
+              <div className="relative z-10 text-center">
+                <div className="mb-8">
+                  <img
+                    src={testimonials[currentTestimonial].image}
+                    alt={testimonials[currentTestimonial].name}
+                    className="w-20 h-20 rounded-full mx-auto mb-6 object-cover border-4 border-white shadow-lg"
+                  />
+
+                  {/* Star Rating */}
+                  <div className="flex justify-center mb-6">
+                    {[...Array(testimonials[currentTestimonial].rating)].map(
+                      (_, i) => (
+                        <Star
+                          key={i}
+                          className="w-6 h-6 text-amber-500 fill-current"
+                        />
+                      )
+                    )}
+                  </div>
+
+                  {/* Testimonial Text */}
+                  <blockquote className="text-xl lg:text-2xl text-gray-700 leading-relaxed mb-8 font-light italic">
+                    "{testimonials[currentTestimonial].text}"
+                  </blockquote>
+
+                  {/* Client Info */}
+                  <div>
+                    <h4 className="text-xl font-semibold text-gray-900 mb-1">
+                      {testimonials[currentTestimonial].name}
+                    </h4>
+                    <p className="text-[var(--color-primary)] font-medium">
+                      {testimonials[currentTestimonial].event}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Navigation Buttons */}
+              <button
+                onClick={prevTestimonial}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white hover:bg-amber-50 text-gray-600 hover:text-amber-600 p-3 rounded-full shadow-lg transition-all duration-300"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button
+                onClick={nextTestimonial}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white hover:bg-amber-50 text-gray-600 hover:text-amber-600 p-3 rounded-full shadow-lg transition-all duration-300"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Pagination Dots */}
+            <div className="flex justify-center mt-8 space-x-2">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentTestimonial(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentTestimonial
+                      ? "bg-[var(--color-primary)] w-8"
+                      : "bg-gray-300 hover:bg-amber-300"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 text-center">
+            <div className="p-6">
+              <div className="text-4xl font-bold text-[var(--color-primary)] mb-2">
+                98%
+              </div>
+              <p className="text-gray-600">Client Satisfaction Rate</p>
+            </div>
+            <div className="p-6">
+              <div className="text-4xl font-bold text-[var(--color-primary)] mb-2">
+                1000+
+              </div>
+              <p className="text-gray-600">Events Successfully Catered</p>
+            </div>
+            <div className="p-6">
+              <div className="text-4xl font-bold text-[var(--color-primary)] mb-2">
+                85%
+              </div>
+              <p className="text-gray-600">Repeat & Referral Clients</p>
             </div>
           </div>
         </div>

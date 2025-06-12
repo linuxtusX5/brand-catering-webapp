@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Phone, Mail } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, Link } from "react-router-dom";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isSolid, setIsSolid] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,14 +15,21 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  const isSolid = location.pathname !== "/" || isScrolled;
+  useEffect(() => {
+    // Update isSolid whenever location or scroll changes
+    if (location.pathname !== "/") {
+      setIsSolid(true);
+    } else {
+      setIsSolid(isScrolled);
+    }
+  }, [location.pathname, isScrolled]);
 
   const navItems = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Menu", path: "/menu" },
-    { name: "Gallery", path: "#gallery" },
-    { name: "Testimonials", path: "#testimonials" },
+    { name: "Gallery", path: "/gallery" },
+    // { name: "Testimonials", path: "/testimonials" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -53,11 +62,13 @@ const Header = () => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center pt-1">
           <div className="flex items-center">
-            <img
-              src="/src/assets/logo.png"
-              alt="Gourmet Catering Co. Logo"
-              className="h-20 w-auto mb-2 text-center"
-            />
+            <Link to="/">
+              <img
+                src="/src/assets/logo.png"
+                alt="Gourmet Catering Co. Logo"
+                className="h-20 w-auto mb-2 text-center"
+              />
+            </Link>
           </div>
 
           {/* Desktop navigation */}
