@@ -22,7 +22,7 @@ const Menu: React.FC = () => {
         <h2 className="text-2xl font-bold text-gray-900">Menu Management</h2>
         <button className="mt-4 sm:mt-0 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
           <Plus className="h-4 w-4" />
-          <span>Add New Item</span>
+          <button>Add New Item</button>
         </button>
       </div>
 
