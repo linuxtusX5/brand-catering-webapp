@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../redux/store";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const LoginForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
-  const notify = () => toast.success("Wow so easy!");
+  const notify = () => toast.success("Login Successfully");
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loginData, setLoginData] = useState({
@@ -14,6 +16,7 @@ const LoginForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginData({
@@ -26,16 +29,32 @@ const LoginForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      console.log("Login attempt:", loginData);
-      dispatch(authActions.login());
-      notify();
-      setIsLoading(false);
-      onClose();
-      // Reset form
-      setLoginData({ email: "", password: "" });
-    }, 1500);
+    // // Simulate API call
+    // setTimeout(() => {
+    //   console.log("Login attempt:", loginData);
+    //   dispatch(authActions.login());
+    //   notify();
+    //   setIsLoading(false);
+    //   onClose();
+    //   // Reset form
+    //   setLoginData({ email: "", password: "" });
+    // }, 1500);
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        { email: loginData.email, password: loginData.password }
+      );
+      if (data.success) {
+        localStorage.setItem("userID", data?.user._id);
+        dispatch(authActions.login());
+        notify();
+        setIsLoading(false);
+        onClose();
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>

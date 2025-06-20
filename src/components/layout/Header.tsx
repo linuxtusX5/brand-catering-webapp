@@ -132,7 +132,7 @@ const Header = () => {
                   <button
                     onClick={() => openAuthModal("login")}
                     className={`font-medium transition-colors duration-300 hover:text-amber-500 ${
-                      isScrolled ? "text-gray-700" : "text-white"
+                      isSolid ? "text-gray-700" : "text-white"
                     }`}
                   >
                     Login

@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, User, Mail, Lock, Phone } from "lucide-react";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const notify = () => toast.success("Register Successfully");
   const [isLoading, setIsLoading] = useState(false);
   const [registerData, setRegisterData] = useState({
     firstName: "",
@@ -13,6 +17,8 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     password: "",
     confirmPassword: "",
   });
+
+  const navigate = useNavigate();
 
   const handleRegisterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRegisterData({
@@ -25,29 +31,40 @@ const Register: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     e.preventDefault();
 
     if (registerData.password !== registerData.confirmPassword) {
-      alert("Passwords do not match!");
+      setIsLoading(false);
+      toast.error("Passwords do not match!");
       return;
     }
     setIsLoading(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      console.log("Register attempt:", registerData);
-      alert(
-        "Registration successful! Please check your email to verify your account. (This is a demo)"
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5000/api/auth/register",
+        {
+          firstName: registerData.firstName,
+          lastName: registerData.lastName,
+          email: registerData.email,
+          phone: registerData.phone,
+          password: registerData.password,
+        }
       );
-      setIsLoading(false);
-      onClose();
-      // Reset form
-      setRegisterData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        password: "",
-        confirmPassword: "",
-      });
-    }, 1500);
+      if (data.success) {
+        notify();
+        setIsLoading(false);
+        onClose();
+        navigate("/gallery");
+        setRegisterData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          password: "",
+          confirmPassword: "",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
