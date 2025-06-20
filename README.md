@@ -1,3 +1,9 @@
+# customer Features
+![Image](https://github.com/user-attachments/assets/360316ae-e9ef-4050-ba7f-85b41ff2cc9d)
+# Admin Features
+![Image](https://github.com/user-attachments/assets/f5ea4bda-7636-4a38-9705-6cffc50c1846)
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
