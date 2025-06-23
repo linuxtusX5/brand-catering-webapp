@@ -1,3 +1,4 @@
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../pages/client/Home";
 import Menu from "../pages/client/Menu";
@@ -18,24 +19,69 @@ import Staff from "../pages/admin/Staff";
 import Inventory from "../pages/admin/Inventory";
 import Settings from "../pages/admin/Settings";
 import Gallery from "../pages/client/Gallery";
+import AuthModal from "../components/AuthModal";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 function AppRoutes() {
-  // const handleContactClick = () => {
-  //   // Example: navigate to contact page
-  //   window.location.href = "/";
-  // };
-
   return (
     <Routes>
       {/* Client Routes */}
       <Route element={<ClientLayout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/catering" element={<Catering />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/gallery" element={<Gallery />} />
+        <Route
+          path="/menu"
+          element={
+            <ProtectedRoute>
+              <Menu />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <ProtectedRoute>
+              <About />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/blog"
+          element={
+            <ProtectedRoute>
+              <Blog />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/catering"
+          element={
+            <ProtectedRoute>
+              <Catering />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <ProtectedRoute>
+              <Contact />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/gallery"
+          element={
+            <ProtectedRoute>
+              <Gallery />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <AuthModal isOpen={true} onClose={() => {}} initialMode="login" />
+          }
+        />
       </Route>
       {/* Admin Routes */}
       <Route path="/admin" element={<AdminLayout />}>
