@@ -1,4 +1,3 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../pages/client/Home";
 import Menu from "../pages/client/Menu";
@@ -19,8 +18,9 @@ import Staff from "../pages/admin/Staff";
 import Inventory from "../pages/admin/Inventory";
 import Settings from "../pages/admin/Settings";
 import Gallery from "../pages/client/Gallery";
-import AuthModal from "../components/AuthModal";
+// import AuthModal from "../components/AuthModal";
 import ProtectedRoute from "../components/ProtectedRoute";
+import Login from "../components/Login";
 
 function AppRoutes() {
   return (
@@ -79,7 +79,8 @@ function AppRoutes() {
         <Route
           path="/login"
           element={
-            <AuthModal isOpen={true} onClose={() => {}} initialMode="login" />
+            // <AuthModal isOpen={true} onClose={() => {}} initialMode="login" />
+            <Login />
           }
         />
       </Route>
