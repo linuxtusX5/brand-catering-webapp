@@ -1,18 +1,32 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Phone, Mail, User } from "lucide-react";
 import { NavLink, useLocation, Link } from "react-router-dom";
-import AuthModal from "../AuthModal";
+// import AuthModal from "../AuthModal";
 
-const Header = () => {
+interface HeaderProps {
+  isLoggedIn: boolean;
+  user: { name: string; email: string } | null;
+  setIsLoggedIn: (value: boolean) => void;
+  setUser: (user: { name: string; email: string } | null) => void;
+  openAuthModal: (mode: "login" | "register") => void;
+}
+
+const Header: React.FC<HeaderProps> = ({
+  isLoggedIn,
+  user,
+  setIsLoggedIn,
+  setUser,
+  openAuthModal,
+}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSolid, setIsSolid] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [authMode, setAuthMode] = useState<"login" | "register">("login");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState<{ name: string; email: string } | null>(
-    null
-  );
+  // const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  // const [authMode, setAuthMode] = useState<"login" | "register">("login");
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [user, setUser] = useState<{ name: string; email: string } | null>(
+  //   null
+  // );
 
   const location = useLocation();
 
@@ -41,10 +55,10 @@ const Header = () => {
     { name: "Contact", path: "/contact" },
   ];
 
-  const openAuthModal = (mode: "login" | "register") => {
-    setAuthMode(mode);
-    setIsAuthModalOpen(true);
-  };
+  // const openAuthModal = (mode: "login" | "register") => {
+  //   setAuthMode(mode);
+  //   setIsAuthModalOpen(true);
+  // };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -214,7 +228,7 @@ const Header = () => {
                     }}
                     className="w-full bg-[var(--color-primary)] hover:bg-amber-600 text-white px-6 py-2 rounded-full font-medium transition-all duration-300"
                   >
-                    Sign Up
+                    Quote
                   </button>
                 </div>
               )}
@@ -223,11 +237,14 @@ const Header = () => {
         </nav>
       </header>
       {/* Auth Modal */}
-      <AuthModal
-        isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
+
+      {/* <AuthModal
+        isOpen={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
         initialMode={authMode}
-      />
+        setIsLoggedIn={setIsLoggedIn}
+        setUser={setUser}
+      /> */}
     </>
   );
 };

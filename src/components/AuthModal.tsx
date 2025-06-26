@@ -4,9 +4,15 @@ import Register from "./Register";
 import React, { useState, useEffect } from "react";
 
 interface AuthModalProps {
+  // isOpen: boolean;
+  // onClose: () => void;
+  // initialMode?: "login" | "register";
+
   isOpen: boolean;
   onClose: () => void;
   initialMode?: "login" | "register";
+  setIsLoggedIn: (value: boolean) => void;
+  setUser: (user: { name: string; email: string }) => void;
 }
 
 const AuthModal: React.FC<AuthModalProps> = ({
