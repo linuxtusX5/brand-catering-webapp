@@ -41,7 +41,7 @@ const LoginForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     // }, 1500);
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "http://localhost:5000/api/v1/auth/login",
         { email: loginData.email, password: loginData.password }
       );
       if (data.success) {

@@ -1,7 +1,35 @@
-import { menuItems } from "../../data/content"; // Adjust the import path as necessary
+import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
+interface MenuItem {
+  _id: string;
+  name: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+}
 
 export default function Menu() {
+  const [menuItems, setMenuItems] = React.useState<MenuItem[]>([]);
+  React.useEffect(() => {
+    const fetchMenuItems = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/v1/menu");
+        console.log("Full API response:", response.data);
+
+        if (Array.isArray(response.data.items)) {
+          setMenuItems(response.data.items);
+        } else {
+          console.error("Menu items data is not an array", response.data.items);
+        }
+      } catch (error) {
+        console.error("Error fetching menu items:", error);
+      }
+    };
+
+    fetchMenuItems();
+  }, []);
   return (
     <div className="max-w-6xl mx-auto px-4 py-12 pt-40">
       <h1 className="text-4xl font-bold text-center mb-12">Our Menu</h1>
@@ -14,9 +42,14 @@ export default function Menu() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {menuItems.map((item) => (
           <div
-            key={item.id}
+            key={item._id}
             className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300"
           >
+            <img
+              src={item.imageUrl}
+              alt={item.name}
+              className="mb-4 rounded-lg"
+            />
             <h3 className="text-xl font-medium mb-2">{item.name}</h3>
             <p className="text-gray-600 mb-4">{item.description}</p>
             <p className="text-yellow-600 font-bold">{item.price}</p>
