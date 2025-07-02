@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Plus, Search, Edit, Trash2, Star, DollarSign } from "lucide-react";
 import { menuItems, Menu_categories } from "../../data/content";
+import Modal from "../../components/Settings/Modal";
+import axios from "axios";
 
 const Menu: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const filteredItems = menuItems.filter((item) => {
     const matchesCategory =
@@ -15,14 +18,141 @@ const Menu: React.FC = () => {
     return matchesCategory && matchesSearch;
   });
 
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+    price: "",
+    category: "",
+    image: null as File | null,
+  });
+
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    setFormData((prev) => ({ ...prev, image: file }));
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const form = new FormData();
+    form.append("name", formData.name);
+    form.append("description", formData.description);
+    form.append("price", formData.price);
+    form.append("category", formData.category);
+    if (formData.image) form.append("image", formData.image);
+
+    try {
+      const res = await axios.post("http://localhost:5000/api/v1/menu", form, {
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODU1NTNjMTc2ZmZjZWMwMmRjNzYwNzMiLCJpYXQiOjE3NTE0NTE2MTUsImV4cCI6MTc1MjA1NjQxNX0.TwEoQX_ogW7E3LP02b1WJlXOmaqvNY9y8s1cZz3aJSo",
+        },
+      });
+
+      const result = await res.data;
+      console.log(result);
+
+      if (result.success) {
+        setIsModalOpen(false);
+        // optionally, refresh menu items
+      }
+    } catch (err) {
+      console.error("Error submitting menu item:", err);
+    }
+  };
+
   return (
     <div className="space-y-6  w-full max-w-7xl mx-auto p-6">
+      {/* Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Grilled Salmon"
+      >
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          title="Add New Menu Item"
+        >
+          <form
+            onSubmit={handleFormSubmit}
+            encType="multipart/form-data"
+            className="space-y-4"
+          >
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              className="w-full border p-2 rounded"
+              value={formData.name}
+              onChange={handleInputChange}
+              required
+            />
+            <textarea
+              name="description"
+              placeholder="Description"
+              className="w-full border p-2 rounded"
+              value={formData.description}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              type="number"
+              name="price"
+              placeholder="Price"
+              className="w-full border p-2 rounded"
+              value={formData.price}
+              onChange={handleInputChange}
+              required
+            />
+            <select
+              name="category"
+              className="w-full border p-2 rounded"
+              value={formData.category}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="">Select Category</option>
+              {Menu_categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="w-full"
+            />
+            <button
+              type="submit"
+              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            >
+              Submit
+            </button>
+          </form>
+        </Modal>
+      </Modal>
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <h2 className="text-2xl font-bold text-gray-900">Menu Management</h2>
-        <button className="mt-4 sm:mt-0 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
+        <button
+          className="mt-4 sm:mt-0 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2"
+          onClick={() => setIsModalOpen(true)}
+        >
           <Plus className="h-4 w-4" />
-          <button>Add New Item</button>
+          <span>Add New Item</span>
         </button>
       </div>
 
