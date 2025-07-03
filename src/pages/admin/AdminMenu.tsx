@@ -24,6 +24,15 @@ const Menu: React.FC = () => {
     price: "",
     category: "",
     image: null as File | null,
+    ingredients: "",
+    allergens: "",
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fat: 0,
+    fiber: 0,
+    preparationTime: 0,
+    spiceLevel: "",
   });
 
   const handleInputChange = (
@@ -46,12 +55,17 @@ const Menu: React.FC = () => {
     form.append("name", formData.name);
     form.append("description", formData.description);
     form.append("price", formData.price);
-    form.append("category", formData.category);
+    const formattedCategory = formData.category
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
+    form.append("category", formattedCategory);
     if (formData.image) form.append("image", formData.image);
 
     try {
       const res = await axios.post("http://localhost:5000/api/v1/menu", form, {
         headers: {
+          "Content-Type": "multipart/form-data",
           Authorization:
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODU1NTNjMTc2ZmZjZWMwMmRjNzYwNzMiLCJpYXQiOjE3NTE0NTE2MTUsImV4cCI6MTc1MjA1NjQxNX0.TwEoQX_ogW7E3LP02b1WJlXOmaqvNY9y8s1cZz3aJSo",
         },
@@ -75,73 +89,155 @@ const Menu: React.FC = () => {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="Grilled Salmon"
+        title="Add New Menu Item"
       >
-        <Modal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          title="Add New Menu Item"
+        <form
+          onSubmit={handleFormSubmit}
+          encType="multipart/form-data"
+          className="space-y-4"
         >
-          <form
-            onSubmit={handleFormSubmit}
-            encType="multipart/form-data"
-            className="space-y-4"
+          {/* Basic Info */}
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            className="w-full border p-2 rounded"
+            value={formData.name}
+            onChange={handleInputChange}
+            required
+          />
+          <textarea
+            name="description"
+            placeholder="Description"
+            className="w-full border p-2 rounded"
+            value={formData.description}
+            onChange={handleInputChange}
+            required
+          />
+          <input
+            type="number"
+            name="price"
+            placeholder="Price"
+            className="w-full border p-2 rounded"
+            value={formData.price}
+            onChange={handleInputChange}
+            required
+          />
+          <select
+            name="category"
+            className="w-full border p-2 rounded"
+            value={formData.category}
+            onChange={handleInputChange}
+            required
           >
+            <option value="">Select Category</option>
+            {Menu_categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
+
+          {/* Ingredients & Allergens */}
+          <input
+            type="text"
+            name="ingredients"
+            placeholder='Ingredients (e.g. "Salmon, Garlic, Lemon")'
+            className="w-full border p-2 rounded"
+            value={formData.ingredients}
+            onChange={handleInputChange}
+          />
+          <input
+            type="text"
+            name="allergens"
+            placeholder='Allergens (e.g. "Fish, Dairy")'
+            className="w-full border p-2 rounded"
+            value={formData.allergens}
+            onChange={handleInputChange}
+          />
+
+          {/* Nutritional Info */}
+          <div className="grid grid-cols-2 gap-2">
             <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              className="w-full border p-2 rounded"
-              value={formData.name}
+              type="number"
+              name="calories"
+              placeholder="Calories"
+              className="border p-2 rounded"
+              value={formData.calories}
               onChange={handleInputChange}
-              required
-            />
-            <textarea
-              name="description"
-              placeholder="Description"
-              className="w-full border p-2 rounded"
-              value={formData.description}
-              onChange={handleInputChange}
-              required
             />
             <input
               type="number"
-              name="price"
-              placeholder="Price"
-              className="w-full border p-2 rounded"
-              value={formData.price}
+              name="protein"
+              placeholder="Protein (g)"
+              className="border p-2 rounded"
+              value={formData.protein}
               onChange={handleInputChange}
-              required
             />
-            <select
-              name="category"
-              className="w-full border p-2 rounded"
-              value={formData.category}
-              onChange={handleInputChange}
-              required
-            >
-              <option value="">Select Category</option>
-              {Menu_categories.map((cat) => (
-                <option key={cat.id} value={cat.id}>
-                  {cat.name}
-                </option>
-              ))}
-            </select>
             <input
-              type="file"
-              name="image"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="w-full"
+              type="number"
+              name="carbs"
+              placeholder="Carbs (g)"
+              className="border p-2 rounded"
+              value={formData.carbs}
+              onChange={handleInputChange}
             />
-            <button
-              type="submit"
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-            >
-              Submit
-            </button>
-          </form>
-        </Modal>
+            <input
+              type="number"
+              name="fat"
+              placeholder="Fat (g)"
+              className="border p-2 rounded"
+              value={formData.fat}
+              onChange={handleInputChange}
+            />
+            <input
+              type="number"
+              name="fiber"
+              placeholder="Fiber (g)"
+              className="border p-2 rounded"
+              value={formData.fiber}
+              onChange={handleInputChange}
+            />
+          </div>
+
+          {/* Preparation Time and Spice Level */}
+          <input
+            type="number"
+            name="preparationTime"
+            placeholder="Preparation Time (minutes)"
+            className="w-full border p-2 rounded"
+            value={formData.preparationTime}
+            onChange={handleInputChange}
+          />
+          <select
+            name="spiceLevel"
+            className="w-full border p-2 rounded"
+            value={formData.spiceLevel}
+            onChange={handleInputChange}
+          >
+            <option value="">Select Spice Level</option>
+            <option value="Mild">Mild</option>
+            <option value="Medium">Medium</option>
+            <option value="Hot">Hot</option>
+            <option value="Extra Hot">Extra Hot</option>
+          </select>
+
+          {/* Image Upload */}
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="w-full"
+          />
+
+          <button
+            type="submit"
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          >
+            Submit
+          </button>
+        </form>
       </Modal>
 
       {/* Header */}
