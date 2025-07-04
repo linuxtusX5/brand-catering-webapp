@@ -1,22 +1,34 @@
 import React, { useState } from "react";
 import { Plus, Search, Edit, Trash2, Star, DollarSign } from "lucide-react";
-import { menuItems, Menu_categories } from "../../data/content";
+import { Menu_categories } from "../../data/content";
 import Modal from "../../components/Settings/Modal";
 import axios from "axios";
 
+interface MenuItem {
+  _id: string;
+  name: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+  category: string;
+  count: number;
+  popular?: boolean;
+  servings?: number;
+}
 const Menu: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [menuItems, setMenuItems] = React.useState<MenuItem[]>([]);
 
-  const filteredItems = menuItems.filter((item) => {
-    const matchesCategory =
-      selectedCategory === "all" || item.category === selectedCategory;
-    const matchesSearch =
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  // const filteredItems = menuItems.filter((item) => {
+  //   const matchesCategory =
+  //     selectedCategory === "all" || item.category === selectedCategory;
+  //   const matchesSearch =
+  //     item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //     item.description.toLowerCase().includes(searchTerm.toLowerCase());
+  //   return matchesCategory && matchesSearch;
+  // });
 
   const [formData, setFormData] = useState({
     name: "",
@@ -26,12 +38,12 @@ const Menu: React.FC = () => {
     image: null as File | null,
     ingredients: "",
     allergens: "",
-    calories: 0,
-    protein: 0,
-    carbs: 0,
-    fat: 0,
-    fiber: 0,
-    preparationTime: 0,
+    calories: "",
+    protein: "",
+    carbs: "",
+    fat: "",
+    fiber: "",
+    preparationTime: "",
     spiceLevel: "",
   });
 
@@ -82,6 +94,33 @@ const Menu: React.FC = () => {
       console.error("Error submitting menu item:", err);
     }
   };
+  React.useEffect(() => {
+    const fetchMenuItems = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/v1/menu");
+        console.log("Full API response:", response.data);
+
+        if (Array.isArray(response.data.items)) {
+          setMenuItems(response.data.items);
+        } else {
+          console.error("Menu items data is not an array", response.data.items);
+        }
+      } catch (error) {
+        console.error("Error fetching menu items:", error);
+      }
+    };
+
+    fetchMenuItems();
+  }, []);
+
+  const filteredItems = menuItems.filter((item) => {
+    const matchesCategory =
+      selectedCategory === "all" || item.category === selectedCategory;
+    const matchesSearch =
+      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <div className="space-y-6  w-full max-w-7xl mx-auto p-6">
@@ -223,13 +262,15 @@ const Menu: React.FC = () => {
           </select>
 
           {/* Image Upload */}
-          <input
-            type="file"
-            name="image"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="w-full"
-          />
+          <div className="flex justify-center items-center flex-col space-y-2">
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="w-full"
+            />
+          </div>
 
           <button
             type="submit"
@@ -255,17 +296,17 @@ const Menu: React.FC = () => {
       {/* Categories */}
       <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
         <div className="flex flex-wrap gap-2">
-          {Menu_categories.map((category) => (
+          {Menu_categories.map((item) => (
             <button
-              key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
+              key={item.id}
+              onClick={() => setSelectedCategory(item.id)}
               className={`px-4 py-2 rounded-lg transition-colors ${
-                selectedCategory === category.id
+                selectedCategory === item.id
                   ? "bg-blue-600 text-white"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
-              {category.name} ({category.count})
+              {item.name} ({item.count})
             </button>
           ))}
         </div>
@@ -289,12 +330,12 @@ const Menu: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredItems.map((item) => (
           <div
-            key={item.id}
+            key={item._id}
             className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow"
           >
             <div className="relative">
               <img
-                src={item.image}
+                src={item.imageUrl}
                 alt={item.name}
                 className="w-full h-48 object-cover"
               />
