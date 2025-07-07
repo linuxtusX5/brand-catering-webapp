@@ -122,6 +122,15 @@ const Menu: React.FC = () => {
     return matchesCategory && matchesSearch;
   });
 
+  const categoryCounts: Record<string, number> = menuItems.reduce(
+    (acc, item) => {
+      acc[item.category] = (acc[item.category] || 0) + 1;
+      acc["all"] = (acc["all"] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  );
+
   return (
     <div className="space-y-6  w-full max-w-7xl mx-auto p-6">
       {/* Modal */}
@@ -306,7 +315,7 @@ const Menu: React.FC = () => {
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
-              {item.name} ({item.count})
+              {item.name} ({categoryCounts[item.id] || 0})
             </button>
           ))}
         </div>

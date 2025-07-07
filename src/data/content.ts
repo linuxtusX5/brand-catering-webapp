@@ -268,10 +268,10 @@ export const orders = [
 ];
 
 export const Menu_categories = [
-  { id: "all", name: "All Items", count: 24 },
-  { id: "appetizers", name: "Appetizers", count: 8 },
-  { id: "mains", name: "Main Courses", count: 10 },
-  { id: "desserts", name: "Desserts", count: 6 },
+  { id: "all", name: "All Items" },
+  { id: "appetizers", name: "Appetizers" },
+  { id: "mains", name: "Main Courses" },
+  { id: "desserts", name: "Desserts" },
 ];
 
 export const menuItems = [
