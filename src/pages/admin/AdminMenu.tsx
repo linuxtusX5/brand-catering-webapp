@@ -21,15 +21,6 @@ const Menu: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [menuItems, setMenuItems] = React.useState<MenuItem[]>([]);
 
-  // const filteredItems = menuItems.filter((item) => {
-  //   const matchesCategory =
-  //     selectedCategory === "all" || item.category === selectedCategory;
-  //   const matchesSearch =
-  //     item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //     item.description.toLowerCase().includes(searchTerm.toLowerCase());
-  //   return matchesCategory && matchesSearch;
-  // });
-
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -88,7 +79,6 @@ const Menu: React.FC = () => {
 
       if (result.success) {
         setIsModalOpen(false);
-        // optionally, refresh menu items
       }
     } catch (err) {
       console.error("Error submitting menu item:", err);
